@@ -2,7 +2,7 @@
 I implemented a GUI via tk
 
 
-This is a simple python made chess game to run in the console.
+This is a simple python made chess game to run in the console (chess.py) or via GUI (see chess_GUI.py).
 You can move by typing eg. "b2 d4". 
 
 I am new into coding and started this project to practice. 
