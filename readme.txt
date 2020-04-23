@@ -1,3 +1,7 @@
+### Update 23.04.2020
+I implemented a GUI via tk
+
+
 This is a simple python made chess game to run in the console.
 You can move by typing eg. "b2 d4". 
 
