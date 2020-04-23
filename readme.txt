@@ -1,5 +1,6 @@
 ### Update 23.04.2020
 I implemented a GUI via tk
+Version used: Python 3.7.4
 
 
 This is a simple python made chess game to run in the console (chess.py) or via GUI (see chess_GUI.py).
