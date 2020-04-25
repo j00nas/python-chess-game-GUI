@@ -31,143 +31,143 @@ def undo_coloring():
 			fields_dic[i]['text'] = ''		
 
 def btnID(id):
-	global tkstart, tkend, startbutton, endbutton, error, white_players, black_players, fields_dic, turn
+	global tkstart, tkend, startbutton, endbutton, error, white_players, black_players, fields_dic, turn, error
 	colored_fields = []
 	fields_dic = {'a1':a1,'a2': a2,'a3': a3,'a4': a4,'a5':a5,'a6':a6,'a7':a7,'a8':a8,'b1':b1,'b2':b2,'b3':b3,'b4':b4,'b5':b5,'b6':b6,'b7':b7,'b8':b8,'c2':c1,'c2':c2,'c3':c3,'c4':c4,'c5':c5,'c6':c6,'c7':c7,'c8':c8,'d1':d1,'d2':d2,'d3':d3,'d4':d4,'d5':d5,'d6':d6,'d7':d7,'d8':d8,'e1':e1,'e2':e2,'e3':e3,'e4':e4,'e5':e5,'e6':e6,'e7':e7,'e8':e8,'f1':f1,'f2':f2,'f3':f3,'f4':f4,'f5':f5,'f6':f6,'f7':f7,'f8':f8,'g1':g1,'g2':g2,'g3':g3,'g4':g4,'g5':g5,'g6':g6,'g7':g7,'g8':g8,'h1':h1,'h2':h2,'h3':h3,'h4':h4,'h5':h5,'h6':h6,'h7':h7,'h8':h8}
-	if tkstart != '':
-		tkend = id
-	if turn == 'W' and (startbutton['text'] in [WR, WN, WP, WQ, WK, WB] or startbutton['text'] ==  WK + '\ncheck!'):
-		if tkend == '' and tkstart == '' and startbutton['text'] != '':
-			tkstart = id
-			startbutton['bg'] = 'lightgreen'
-	elif turn == 'B' and (startbutton['text'] in [BR, BN, BP, BQ, BK, BB] or startbutton['text'] ==  BK + '\ncheck!'):
-		if tkend == '' and tkstart == '' and startbutton['text'] != '':
-			tkstart = id
-			startbutton['bg'] = 'lightgreen'	
+	if error != 4:
+		if tkstart != '':
+			tkend = id
+		if turn == 'W' and (startbutton['text'] in [WR, WN, WP, WQ, WK, WB] or startbutton['text'] ==  WK + '\ncheck!'):
+			if tkend == '' and tkstart == '' and startbutton['text'] != '':
+				tkstart = id
+				startbutton['bg'] = 'lightgreen'
+		elif turn == 'B' and (startbutton['text'] in [BR, BN, BP, BQ, BK, BB] or startbutton['text'] ==  BK + '\ncheck!'):
+			if tkend == '' and tkstart == '' and startbutton['text'] != '':
+				tkstart = id
+				startbutton['bg'] = 'lightgreen'	
 
-	if tkstart != '' and tkend == '': 
-		get_positions()
-		translate_a = {'a' : 0, 'b' : 1, 'c' : 2, 'd' : 3, 'e' : 4, 'f' : 5, 'g' : 6, 'h' : 7}
-		translate_b = {'8' : 0, '7' : 1, '6' : 2, '5' : 3, '4' : 4, '3' : 5, '2' : 6, '1' : 7}
-		start_position = (translate_b[tkstart[1]], translate_a[tkstart[0]])
-		translate_a_back = {0 : 'a', 1 : 'b' , 2 : 'c', 3 : 'd', 4 : 'e', 5 : 'f', 6 : 'g', 7 : 'h'}
-		translate_b_back = {0 : '8', 1 : '7', 2 : '6', 3 : '5', 4 : '4', 5 : '3', 6 : '2', 7 : '1'}
-		if turn == 'W':
-			for i in white_players:
-				if i.position == start_position:
-					for i in i.possible_moves:
-						fn = translate_a_back[i[1]]
-						sn = translate_b_back[i[0]]
-						fld = fn+sn
-						for item in fields_dic:
-							if item == fld:
-								colored_fields.append(item)
-								fields_dic[item]['fg'] = 'lightgreen'
-								if fields_dic[item]['text'] == '':
-									fields_dic[item]['text'] = '\u0E4F'
-		else:
-			for i in black_players:
-				if i.position == start_position:
-					for i in i.possible_moves:
-						fn = translate_a_back[i[1]]
-						sn = translate_b_back[i[0]]
-						fld = fn+sn
-						for item in fields_dic:
-							if item == fld:
-								colored_fields.append(item)
-								fields_dic[item]['fg'] = 'lightgreen'
-								if fields_dic[item]['text'] == '':
-									fields_dic[item]['text'] = '\u0E4F'
-			
-	
-	
-	if tkstart != '' and tkend != '':
-		main()
-		if error == '':
-			tkstart = ''
-			tkend = ''
-			startbutton['bg'] = startbutton_color
-			if endbutton_color == 'lightgreen':
-				endbutton['bg'] = startbutton_color
-			else:
-				endbutton['bg'] = endbutton_color				
-			startbutton['text'] = ''
-			endbutton['text'] = startbutton_text
-			fields = [a1,a2,a3,a4,a5,a6,a7,a8,b1,b2,b3,b4,b5,b6,b7,b8,c1,c2,c3,c4,c5,c5,c6,c7,c8,d1,d2,d3,d4,d5,d6,d7,d8,e1,e2,e3,e4,e5,e6,e7,e8,f1,f2,f3,f4,f5,f6,f7,f8,g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
-			for i in fields:
-				if i['text'] == BK + '\ncheck!':
-					i['text'] = BK
-				if i['text'] == WK + '\ncheck!':
-					i['text'] = WK
-			error = ''
-			undo_coloring()
-		elif error == 3:
-			tkstart = ''
-			tkend = ''
-			startbutton['bg'] = startbutton_color
-			if endbutton_color == 'lightgreen':
-				endbutton['bg'] = startbutton_color
-			else:
-				endbutton['bg'] = endbutton_color				
-			startbutton['text'] = ''
-			endbutton['text'] = startbutton_text
-			fields = [a1,a2,a3,a4,a5,a6,a7,a8,b1,b2,b3,b4,b5,b6,b7,b8,c1,c2,c3,c4,c5,c5,c6,c7,c8,d1,d2,d3,d4,d5,d6,d7,d8,e1,e2,e3,e4,e5,e6,e7,e8,f1,f2,f3,f4,f5,f6,f7,f8,g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
-			if turn == 'B':
-				for i in fields:
-					if i['text'] == BK:
-						i['text'] = BK + '\ncheck!'
-			elif turn == 'W':
-				for i in fields:
-					if i['text'] == WK:
-						i['text'] = WK + '\ncheck!'	
-			tkstart = ''
-			tkend = ''
-			startbutton['bg'] = startbutton_color
-			if endbutton_color == 'lightgreen':
-				endbutton['bg'] = startbutton_color
-			else:
-				endbutton['bg'] = endbutton_color	
-			error = ''
-			undo_coloring()
-		elif error == 2:
-			tkstart = ''
-			tkend = ''
-			startbutton['bg'] = startbutton_color
-			if endbutton_color == 'lightgreen':
-				endbutton['bg'] = startbutton_color
-			else:
-				endbutton['bg'] = endbutton_color				
-			startbutton['text'] = ''
-			endbutton['text'] = startbutton_text
-			fields = [a1,a2,a3,a4,a5,a6,a7,a8,b1,b2,b3,b4,b5,b6,b7,b8,c1,c2,c3,c4,c5,c5,c6,c7,c8,d1,d2,d3,d4,d5,d6,d7,d8,e1,e2,e3,e4,e5,e6,e7,e8,f1,f2,f3,f4,f5,f6,f7,f8,g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
+		if tkstart != '' and tkend == '': 
+			get_positions()
+			translate_a = {'a' : 0, 'b' : 1, 'c' : 2, 'd' : 3, 'e' : 4, 'f' : 5, 'g' : 6, 'h' : 7}
+			translate_b = {'8' : 0, '7' : 1, '6' : 2, '5' : 3, '4' : 4, '3' : 5, '2' : 6, '1' : 7}
+			start_position = (translate_b[tkstart[1]], translate_a[tkstart[0]])
+			translate_a_back = {0 : 'a', 1 : 'b' , 2 : 'c', 3 : 'd', 4 : 'e', 5 : 'f', 6 : 'g', 7 : 'h'}
+			translate_b_back = {0 : '8', 1 : '7', 2 : '6', 3 : '5', 4 : '4', 5 : '3', 6 : '2', 7 : '1'}
 			if turn == 'W':
-				for i in fields:
-					if i['text'] == BK:
-						i['text'] = BK + '\ncheck \nmate!'
-			elif turn == 'B':
-				for i in fields:
-					if i['text'] == WK:
-						i['text'] = WK + '\ncheck \nmate!'	
-			tkstart = ''
-			tkend = ''
-			startbutton['bg'] = startbutton_color
-			if endbutton_color == 'lightgreen':
-				endbutton['bg'] = startbutton_color
+				for i in white_players:
+					if i.position == start_position:
+						for i in i.possible_moves:
+							fn = translate_a_back[i[1]]
+							sn = translate_b_back[i[0]]
+							fld = fn+sn
+							for item in fields_dic:
+								if item == fld:
+									colored_fields.append(item)
+									fields_dic[item]['fg'] = 'lightgreen'
+									if fields_dic[item]['text'] == '':
+										fields_dic[item]['text'] = '\u0E4F'
 			else:
-				endbutton['bg'] = endbutton_color	
-			error = 2	
-			undo_coloring()		
-			
-		else:
-			tkstart = ''
-			tkend = ''
-			startbutton['bg'] = startbutton_color
-			if endbutton_color == 'lightgreen':
-				endbutton['bg'] = startbutton_color
+				for i in black_players:
+					if i.position == start_position:
+						for i in i.possible_moves:
+							fn = translate_a_back[i[1]]
+							sn = translate_b_back[i[0]]
+							fld = fn+sn
+							for item in fields_dic:
+								if item == fld:
+									colored_fields.append(item)
+									fields_dic[item]['fg'] = 'lightgreen'
+									if fields_dic[item]['text'] == '':
+										fields_dic[item]['text'] = '\u0E4F'
+				
+		
+		
+		if tkstart != '' and tkend != '':
+			main()
+			if error == '':
+				tkstart = ''
+				tkend = ''
+				startbutton['bg'] = startbutton_color
+				if endbutton_color == 'lightgreen':
+					endbutton['bg'] = startbutton_color
+				else:
+					endbutton['bg'] = endbutton_color				
+				startbutton['text'] = ''
+				endbutton['text'] = startbutton_text
+				fields = [a1,a2,a3,a4,a5,a6,a7,a8,b1,b2,b3,b4,b5,b6,b7,b8,c1,c2,c3,c4,c5,c5,c6,c7,c8,d1,d2,d3,d4,d5,d6,d7,d8,e1,e2,e3,e4,e5,e6,e7,e8,f1,f2,f3,f4,f5,f6,f7,f8,g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
+				for i in fields:
+					if i['text'] == BK + '\ncheck!':
+						i['text'] = BK
+					if i['text'] == WK + '\ncheck!':
+						i['text'] = WK
+				error = ''
+				undo_coloring()
+			elif error == 3:
+				tkstart = ''
+				tkend = ''
+				startbutton['bg'] = startbutton_color
+				if endbutton_color == 'lightgreen':
+					endbutton['bg'] = startbutton_color
+				else:
+					endbutton['bg'] = endbutton_color				
+				startbutton['text'] = ''
+				endbutton['text'] = startbutton_text
+				fields = [a1,a2,a3,a4,a5,a6,a7,a8,b1,b2,b3,b4,b5,b6,b7,b8,c1,c2,c3,c4,c5,c5,c6,c7,c8,d1,d2,d3,d4,d5,d6,d7,d8,e1,e2,e3,e4,e5,e6,e7,e8,f1,f2,f3,f4,f5,f6,f7,f8,g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
+				if turn == 'B':
+					for i in fields:
+						if i['text'] == BK:
+							i['text'] = BK + '\ncheck!'
+				elif turn == 'W':
+					for i in fields:
+						if i['text'] == WK:
+							i['text'] = WK + '\ncheck!'	
+				tkstart = ''
+				tkend = ''
+				startbutton['bg'] = startbutton_color
+				if endbutton_color == 'lightgreen':
+					endbutton['bg'] = startbutton_color
+				else:
+					endbutton['bg'] = endbutton_color	
+				error = ''
+				undo_coloring()
+			elif error == 2:
+				tkstart = ''
+				tkend = ''
+				startbutton['bg'] = startbutton_color
+				if endbutton_color == 'lightgreen':
+					endbutton['bg'] = startbutton_color
+				else:
+					endbutton['bg'] = endbutton_color				
+				startbutton['text'] = ''
+				endbutton['text'] = startbutton_text
+				fields = [a1,a2,a3,a4,a5,a6,a7,a8,b1,b2,b3,b4,b5,b6,b7,b8,c1,c2,c3,c4,c5,c5,c6,c7,c8,d1,d2,d3,d4,d5,d6,d7,d8,e1,e2,e3,e4,e5,e6,e7,e8,f1,f2,f3,f4,f5,f6,f7,f8,g1,g2,g3,g4,g5,g6,g7,g8,h1,h2,h3,h4,h5,h6,h7,h8]
+				if turn == 'W':
+					for i in fields:
+						if i['text'] == BK:
+							i['text'] = BK + '\ncheck \nmate!'
+				elif turn == 'B':
+					for i in fields:
+						if i['text'] == WK:
+							i['text'] = WK + '\ncheck \nmate!'	
+				tkstart = ''
+				tkend = ''
+				startbutton['bg'] = startbutton_color
+				if endbutton_color == 'lightgreen':
+					endbutton['bg'] = startbutton_color
+				else:
+					endbutton['bg'] = endbutton_color	
+				error = 4	
+				undo_coloring()		
 			else:
-				endbutton['bg'] = endbutton_color	
-			error = ''
-			undo_coloring()
+				tkstart = ''
+				tkend = ''
+				startbutton['bg'] = startbutton_color
+				if endbutton_color == 'lightgreen':
+					endbutton['bg'] = startbutton_color
+				else:
+					endbutton['bg'] = endbutton_color	
+				error = ''
+				undo_coloring()
 			
 
 
