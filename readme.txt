@@ -1,3 +1,7 @@
+### Update 25.04.2020
+fixed a bug where you could still move the figures after check mate (in GUI-Version)
+
+
 ### Update 23.04.2020
 I implemented a GUI via TKinter
 Version used: Python 3.7.4
