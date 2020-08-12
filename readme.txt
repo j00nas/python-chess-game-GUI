@@ -11,7 +11,4 @@ Requirements: TKinter
 This is a simple python made chess game to run in the console (chess.py). 
 You can move by typing eg. "b2 d4". 
 
-Or you can alos play via GUI (see chess_GUI.py).
-
-
-
+Or you can also play via GUI (see chess_GUI.py).
