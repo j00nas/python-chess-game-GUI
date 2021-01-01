@@ -1,4 +1,4 @@
-![alt text](https://github.com/j00nas/Teamfight-Tactics-TFT-Top-combs-analysis/blob/main/stats_tft.png?raw=true)
+![alt text](https://github.com/j00nas/python-chess-game-GUI/blob/master/gameGUI.png?raw=true)
 
 ### Update 01.01.2021
 
