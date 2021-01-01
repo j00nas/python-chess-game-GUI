@@ -344,7 +344,7 @@ history_gui.configure(yscrollcommand=scroll.set, state='disabled')
 history_gui.grid(row = 4, column = 9, rowspan = 2)
 
 restartgame_button = Button(tk, text='Restart Game', bg='white', height=1, width=10, command=lambda: [restart_game()])
-restartgame_button.config(font=(10))
+restartgame_button.config(font=(10), pady = 5, padx = 10)
 restartgame_button.grid(row=8, column=9)
 
 
