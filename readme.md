@@ -1,8 +1,8 @@
-![alt text](https://github.com/j00nas/python-chess-game-GUI/blob/master/gameGUI.png?raw=true)
+
 
 ### Update 01.01.2021
 
---- Version 2.0 -----
+#### Version 2.0 ---- chess_v2_GUI.py
 
 I completly revised my code, fixed some bugs and added more functions:
 
@@ -12,7 +12,7 @@ I completly revised my code, fixed some bugs and added more functions:
 - The last move is visible through coloring
 - Rochade is added
 
-
+![alt text](https://github.com/j00nas/python-chess-game-GUI/blob/master/gameGUI.png?raw=true)
 
 ### Update 25.04.2020
 fixed a bug where you could still move the figures after check mate (in GUI-Version)
