@@ -4,7 +4,7 @@
 
 I completly revised my code, fixed some bugs and added more functions:
 
-- It displays the game historie
+- It displays the game history
 - Button added to restart the Game
 - It displays the turn of the player
 - The last move is visible through coloring
